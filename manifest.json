@@ -1,11 +1,11 @@
 {
   "name": "ALO Studio Suite",
   "short_name": "ALO",
-  "description": "A multitasking workspace suite app for productivity.",
+  "description": "Welcome to ALO app, a multitasking app to help you for daily life.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#083b4c",
+  "background_color": "#09202a",
+  "theme_color": "#0a2e3b",
   "orientation": "portrait-primary",
   "icons": [
     {
