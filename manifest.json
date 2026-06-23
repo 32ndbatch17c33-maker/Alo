@@ -1,23 +1,28 @@
 {
-  "name": "ALO Studio Suite",
   "short_name": "ALO",
-  "description": "A multitasking application tailored for daily life tracking, timetables, and analytics.",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#f3f7f9",
-  "theme_color": "#0a2e3b",
-  "orientation": "portrait-primary",
+  "name": "ALO Studio Suite",
+  "description": "An elegant productivity, scheduling, and workspace management environment.",
   "icons": [
     {
       "src": "icon-192.png",
-      "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
     },
     {
       "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "sizes": "512x512"
     }
-  ]
+  ],
+  "start_url": "./index.html",
+  "background_color": "#09202a",
+  "theme_color": "#0a2e3b",
+  "display": "standalone",
+  "orientation": "portrait-primary"
 }
