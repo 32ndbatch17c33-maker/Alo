@@ -1,24 +1,23 @@
 {
-  "name": "ALO Studio Suite",
   "short_name": "ALO",
-  "description": "Welcome to ALO app, a multitasking app to help you for daily life.",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#09202a",
-  "theme_color": "#0a2e3b",
-  "orientation": "portrait-primary",
+  "name": "ALO Studio Suite",
+  "description": "A comprehensive multitasking app engineered to manage daily operational workflows, matrix layouts, scheduling, and analytics tracking.",
   "icons": [
     {
       "src": "icon-192.png",
-      "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "sizes": "192x192"
     },
     {
-      "src": "icon-512.png",
-      "sizes": "512x512",
+      "src": "icon-192.png",
       "type": "image/png",
-      "purpose": "any maskable"
+      "sizes": "192x192",
+      "purpose": "maskable"
     }
-  ]
+  ],
+  "start_url": ".",
+  "background_color": "#f3f7f9",
+  "theme_color": "#0a2e3b",
+  "display": "standalone",
+  "orientation": "portrait"
 }
