@@ -2073,5 +2073,38 @@
             });
         }
     </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('ALO Service Worker registered successfully with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('ALO Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // Optional: Broadcast online/offline state change to user
+        window.addEventListener('online', () => {
+            const banner = document.getElementById('welcomeToastBanner');
+            if (banner) {
+                banner.style.display = 'block';
+                banner.innerText = 'Connected back online! All system matrices synchronized.';
+                setTimeout(() => { banner.style.display = 'none'; }, 4000);
+            }
+        });
+
+        window.addEventListener('offline', () => {
+            const banner = document.getElementById('welcomeToastBanner');
+            if (banner) {
+                banner.style.display = 'block';
+                banner.innerText = 'Operating in Offline Mode. Core matrices remain active.';
+            }
+        });
+    </script>
+</body>
+</html>
 </body>
 </html>
