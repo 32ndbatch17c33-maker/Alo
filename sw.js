@@ -1,56 +1,65 @@
-const CACHE_NAME = 'alo-studio-cache-v1';
+const CACHE_NAME = 'alo-studio-suite-v1';
 const ASSETS_TO_CACHE = [
   './',
-  './index.html',
   './manifest.json',
   './icon-192.png',
-  './icon-512.png',
-  'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,900;1,600&display=swap',
+  'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,600;0,900;1,600&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
 ];
 
-// Installation lifecycle hook - Populate Cache Engine Binaries
+// If your main html file is named index.html, update or append it to the assets list above.
+
+// Installation Phase
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Pre-caching Core Application Shell Assets...');
       return cache.addAll(ASSETS_TO_CACHE);
-    })
+    }).then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
-// Activation lifecycle hook - Clear older cache schemas
+// Activation Phase - Clears older cache instances if present
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cache) => {
           if (cache !== CACHE_NAME) {
-            console.log('[Service Worker] Cleaning deprecated cache structural binaries:', cache);
             return caches.delete(cache);
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// Network intercept fetch hook - Cache First / Network Fallback Strategy
+// Intercept Network Requests for Cache-First Strategy
 self.addEventListener('fetch', (event) => {
-  // Avoid intercepting non-GET calls (such as data exports or external saves)
-  if (event.request.method !== 'GET') return;
-
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
         return cachedResponse;
       }
-      return fetch(event.request).catch(() => {
-        // Fallback context validation could go here if offline paths are customized
+      return fetch(event.request).then((networkResponse) => {
+        // Fallback catch verification for external style/script fetches
+        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+          return networkResponse;
+        }
+        
+        // Cache newly dynamic requests dynamically if applicable
+        const responseToCache = networkResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          // Filter to avoid caching POST requests or data URIs
+          if (event.request.method === 'GET' && event.request.url.startsWith('http')) {
+            cache.put(event.request, responseToCache);
+          }
+        });
+
+        return networkResponse;
       });
+    }).catch(() => {
+      // Offline fallback handling if asset is completely missing
     })
   );
 });
