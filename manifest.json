@@ -1,28 +1,24 @@
 {
-  "short_name": "ALO",
   "name": "ALO Studio Suite",
-  "description": "An elegant productivity, scheduling, and workspace management environment.",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "icon-192.png",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icon-512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
+  "short_name": "ALO",
+  "description": "A versatile multitasking suite containing schedules, planners, trackers, and world clocks.",
   "start_url": "./index.html",
+  "display": "standalone",
   "background_color": "#09202a",
   "theme_color": "#0a2e3b",
-  "display": "standalone",
-  "orientation": "portrait-primary"
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
